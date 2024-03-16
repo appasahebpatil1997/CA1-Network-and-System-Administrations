@@ -1,0 +1,26 @@
+---
+- name: Deploying the Apache Docker container
+  hosts: linux
+  become: true
+
+  tasks:
+    - name: Pull Apache image
+      docker_image:
+        name: httpd
+        state: latest
+
+    - name: Run Apache container
+      docker_container:
+        name: my_apache
+        image: httpd
+        networks:
+          - name: my-network
+            ipv4_address: 172.16.10.1
+
+    - name: Create custom network (optional)
+      docker_network:
+        name: my-network
+        state: present
+
+    - name: Ensure Apache service is accessible
+
