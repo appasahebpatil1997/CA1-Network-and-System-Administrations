@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> IOC Collection </title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url("https://wallpapercave.com/w/wp5799725.jpg");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.2); /* Adjust background opacity */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0); /* Increase box-shadow size */
+      text-align: center; /* Center text */
+    }
+
+    .button {
+      background-color: #007bff;
+      color: brown
+      border: none;
+      padding: 12px 24px; /* Increase padding */
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s; /* Smooth hover transition */
+    }
+
+    .button:hover {
+      background-color: #0056b3; /* Darker color on hover */
+    }
+
+    h1 {
+      color: Pink;
+      font-size: 48px; /* Increase font size */
+      margin-bottom: 50px; /* Increase margin */
+    }
+
+    iframe {
+      width: 230%;
+      height: 570px; /* Adjust the height as needed */
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1> IOC Collection </h1>
+    <button onclick="showThreatMap()" class="button">Live Threat Map</button>
+    <button onclick="IPAddress()" class="button">IP Address</button>
+    <button onclick="showURLs()" class="button">URLs</button>
+    <div id="threatMapContainer" style="display: none;">
+      <iframe id="threatMapFrame" src=""></iframe>
+    </div>
+  </div>
+
+  <script>
+  function showThreatMap() {
+    var url = 'https://threatmap.checkpoint.com/';
+    window.open(url, '_blank', 'width=800,height=600');
+  }
+
+  function IPAddress() {
+    // Implement functionality for "IP Address" button
+  }
+
+  function showURLs() {
+    // Implement functionality for "URLs" button
+  }
+</script>
+<button onclick="scanEndpoint()" class="button">Scan Endpoint</button>
+
+<script>
+  function scanEndpoint() {
+    fetch('/scanEndpoint', {
+      method: 'POST',
+      body: JSON.stringify(data_to_scan), // Provide the data to scan here
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Handle scan results
+      console.log('Scan Result:', data.scan_result);
+      alert('Scan Result: ' + data.scan_result);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Error occurred during scanning');
+    });
+  }
+
+</script>
+</body>
+</html>
